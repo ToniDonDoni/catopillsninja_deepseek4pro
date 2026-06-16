@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Neon Kitty Catcher</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- MediaPipe Hands -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Video feed (hidden, used for tracking) -->
+  <video id="video-feed" autoplay playsinline muted></video>
+
+  <!-- Main game overlay -->
+  <div id="game-container">
+    <!-- HUD -->
+    <div id="hud">
+      <div id="score-display" class="neon-text neon-cyan">SCORE: <span id="score-value">0</span></div>
+      <div id="combo-display" class="neon-text neon-magenta">COMBO: <span id="combo-value">0</span>x</div>
+      <div id="missed-display" class="neon-text neon-pink">MISSED: <span id="missed-value">0</span>/5</div>
+    </div>
+
+    <!-- Game canvas -->
+    <canvas id="game-canvas"></canvas>
+
+    <!-- Loading screen -->
+    <div id="loading-screen" class="screen">
+      <h1 class="neon-text neon-cyan title-glow">NEON KITTY CATCHER</h1>
+      <div id="loading-status" class="neon-text neon-pink">INITIALIZING CAMERA...</div>
+      <div class="spinner"></div>
+      <p id="camera-error" class="neon-text neon-magenta" style="display:none">
+        CAMERA ACCESS DENIED<br>
+        <button id="use-mouse-btn" class="neon-btn">PLAY WITH MOUSE</button>
+      </p>
+    </div>
+
+    <!-- Start screen -->
+    <div id="start-screen" class="screen" style="display:none">
+      <h1 class="neon-text neon-cyan title-glow">NEON KITTY CATCHER</h1>
+      <p class="neon-text neon-pink subtitle">CATCH THE KITTIES. DROP THEM IN THE GLASS.</p>
+      <button id="start-btn" class="neon-btn neon-btn-large">▶ START GAME</button>
+      <p class="neon-text neon-cyan hint">Move your finger in front of the camera to catch cats!</p>
+    </div>
+
+    <!-- Game Over screen -->
+    <div id="gameover-screen" class="screen" style="display:none">
+      <h1 class="neon-text neon-magenta title-glow">GAME OVER</h1>
+      <div id="final-score" class="neon-text neon-cyan score-huge">0</div>
+      <p class="neon-text neon-pink">POINTS</p>
+      <button id="restart-btn" class="neon-btn neon-btn-large">↻ PLAY AGAIN</button>
+    </div>
+
+    <!-- Cat-to-pill transformation overlay effect -->
+    <div id="transform-overlay" style="display:none"></div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

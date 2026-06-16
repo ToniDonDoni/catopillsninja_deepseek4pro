@@ -1,0 +1,14 @@
+{
+  "name": "neon-kitty-catcher",
+  "version": "1.0.0",
+  "description": "Neon Kitty Catcher — a psychedelic browser game with camera-based finger tracking",
+  "scripts": {
+    "start": "node server.js",
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "report": "npx playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.0"
+  }
+}
