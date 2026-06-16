@@ -1,128 +1,68 @@
-# Neon Kitty Catcher 🐱💊
+Hermes Agent v0.13.0 + Deepseek 4 Pro
 
-A psychedelic browser game inspired by Fruit Ninja. Cats fly across the screen — catch them with your finger (via webcam) and drop them into a neon glass on the right. Each cat transforms into a pill and dissolves, earning you points.
+Task: Develop a Browser Game Called Neon Kitty Catcher
 
-## Visual Style
+Create a JavaScript browser game inspired by Fruit Ninja.
 
-- Acidic neon colors (cyan, magenta, lime, hot pink)
-- Strong glow effects on all elements
-- Psychedelic background with animated grid and stars
-- Smooth particle effects (trails, dissolution bursts, sparkles)
-- Dark cyberpunk atmosphere
+Concept
 
-## Project Structure
+Cats fly across the screen.
 
-```
-catopillsninja_deepseek4pro/
-├── index.html              # Main HTML with MediaPipe CDN scripts
-├── style.css               # Neon/psychedelic CSS styling
-├── server.js               # Simple Node.js static server
-├── package.json            # Dependencies & npm scripts
-├── playwright.config.js    # Playwright test configuration
-├── js/
-│   ├── main.js             # Entry point, screen management, init
-│   ├── constants.js        # Game configuration & color palette
-│   ├── entities.js         # Cat class, Glass class, cat spawner
-│   ├── game.js             # Core game loop, state, physics, scoring
-│   ├── renderer.js         # Canvas background, grid, stars, glow
-│   ├── tracker.js          # Camera/MediaPipe hand tracking + mouse fallback
-│   └── particles.js        # Particle system (trail, dissolve, sparkles)
-├── tests/
-│   └── game.spec.js        # Playwright E2E test suite (10 tests)
-└── playwright-report/
-    └── index.html          # Generated HTML test report
-```
+The player uses the device camera. The system tracks the movement of the player’s finger in front of the camera. The player must catch cats with finger movements and move them into a glass positioned on the right side of the screen.
 
-## How It Works
+When a cat is dropped into the glass, it transforms into a pill and dissolves.
 
-1. **Camera tracking**: Uses MediaPipe Hands to detect your index fingertip via webcam
-2. **Mouse fallback**: Automatically falls back to mouse/touch if camera is unavailable, or use `?mode=mouse` URL parameter
-3. **Grab mechanics**: Press and hold (mouse down / finger detected) near a flying cat to grab it
-4. **Drop zone**: Drag grabbed cats to the glowing glass on the right side of the screen
-5. **Transformation**: Cats morph into pills, then dissolve into particles — scoring points
-6. **Combo system**: Consecutive catches multiply your score (up to 5x)
-7. **Game over**: Miss 5 cats and the game ends; restart anytime
+The player earns points for successfully processing cats.
 
-## Installation
+Visual Style
 
-```bash
-cd /work/catopillsninja_deepseek4pro
-npm install
-npx playwright install chromium
-```
+* Acidic, vibrant colors
+* Neon effects
+* Strong glow effects
+* Psychedelic atmosphere
+* Visually rich animations
+* Modern and striking appearance
 
-## Run Instructions
+Requirements
 
-Start the development server:
+* The game must run in a web browser.
+* Controls must use the device camera.
+* Finger tracking must be the primary interaction method.
+* Cats must be catchable and movable.
+* A glass must be positioned on the right side of the screen.
+* Dropping a cat into the glass must trigger a transformation animation.
+* The resulting pill must dissolve.
+* The game must include a scoring system.
+* The player must be able to restart the game after a game-over state.
 
-```bash
-npm start
-# or: node server.js
-```
+Implementation Quality
 
-Then open **http://localhost:8080** in your browser.
+The code must be clean, understandable, and maintainable.
 
-For mouse-only mode (no camera prompt):
+All architectural and technical decisions should be made independently.
 
-```
-http://localhost:8080/?mode=mouse
-```
+Testing
 
-## Test Execution
+End-to-end automated tests using Playwright are mandatory.
 
-```bash
-# Run all tests
-npm test
+The tests must cover the primary user scenarios of the game.
 
-# Run with visible browser
-npm run test:headed
+Validation
 
-# Run a specific test
-npx playwright test --grep "game over"
+After development is complete, you must:
 
-# View HTML report
-npm run report
-# or: npx playwright show-report
-```
+1. Run all end-to-end tests.
+2. Show the test execution results.
+3. Generate and present a Playwright report.
+4. Confirm that all tests pass successfully.
 
-## Playwright Report
+Final Deliverables
 
-After running tests, the HTML report is at:
+After completing the project, provide:
 
-```
-/work/catopillsninja_deepseek4pro/playwright-report/index.html
-```
+* Installation instructions
+* Run instructions
+* Test execution instructions
+* The path or link to the Playwright report
+* A brief description of the project structure
 
-To view it:
-```bash
-cd /work/catopillsninja_deepseek4pro
-npx playwright show-report
-```
-
-## Test Coverage (10 tests)
-
-| # | Test | What It Verifies |
-|---|------|-----------------|
-| 1 | Game loads and shows start screen | Initial page load, title, start button |
-| 2 | All required DOM elements present | Every game element is attached to the DOM |
-| 3 | Starting game activates HUD | HUD visibility, score/combo/missed at 0, canvas visible |
-| 4 | Mouse interaction works | Mouse press-drag-release doesn't crash the game |
-| 5 | Game runs without crashing | Game survives 5 seconds of play |
-| 6 | Missed counter changes | Cats flying off screen increment the missed count |
-| 7 | Game over triggers | Miss limit reached → game over screen appears |
-| 8 | Restart resets state | Restart button resets score, missed, hides game over |
-| 9 | Window resize handled | Game survives viewport resizes |
-| 10 | Full lifecycle | Start → play → gameover → restart complete flow |
-
-## Controls
-
-- **Camera mode**: Move your index finger in front of the webcam
-- **Mouse mode**: Click and drag to grab cats, release to drop
-- **Touch mode**: Touch and drag on mobile devices
-
-## Tech Stack
-
-- **Frontend**: Vanilla HTML/CSS/JS (ES modules), Canvas 2D API
-- **Hand tracking**: MediaPipe Hands (loaded from CDN)
-- **Testing**: Playwright (Chromium, headless)
-- **Server**: Node.js `http` module (zero-dependency static server)
